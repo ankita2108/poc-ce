@@ -1,5 +1,11 @@
 subprojects {
-    apply plugin: com.alight.gradle.plugins.JavaLibPlugin
+    apply plugin: 'java-library'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
 
     dependencies {
         // Testing dependencies

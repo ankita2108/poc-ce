@@ -1,6 +1,7 @@
 pluginManagement {
     repositories {
-        maven { url "${artifactory_contextUrl}/dx-plugins-release" }
+        gradlePluginPortal()
+        mavenCentral()
     }
 }
 
