@@ -1,0 +1,17 @@
+# ***************************************************************************************************************
+# DO NOT MODIFY THIS FILE.  This file may be replaced at anytime without notice in your source code repository.
+# This file is part of the standard development framework at Alight. If you have suggested changes, please
+# see this page for how to contribute to the Alight Development "Paved Paths":
+# https://alightarchitecture.atlassian.net/wiki/x/AYC6GQ
+#****************************************************************************************************************
+
+name: "Initialize repository configs"
+run-name: "Initialize repository configs"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dispatch_job:
+    uses: AlightEngineering/dx-automation/.github/workflows/init.yml@main
+    secrets: inherit  # pragma: allowlist secret

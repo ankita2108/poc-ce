@@ -1,0 +1,18 @@
+#######################################################################################
+###                                                                                 ###
+###    DO NOT MODIFY THIS FILE                                                      ###
+###                                                                                 ###
+#######################################################################################
+
+name: Java App Publish
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'hotfix/*'
+
+jobs:
+  run-ci-publish:
+    uses: AlightEngineering/dx-automation/.github/workflows/java-paved-path-publish.yml@main
+    secrets: inherit  # pragma: allowlist secret

@@ -1,0 +1,15 @@
+buildscript {
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
+
+    repositories {
+        maven {
+            url "${artifactory_contextUrl}/dx-plugins-release"
+        }
+    }
+
+    dependencies {
+        classpath("com.alight.gradle:dx-gradle-plugin:1.+") { changing = true }
+    }
+}

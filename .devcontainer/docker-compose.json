@@ -1,0 +1,33 @@
+{
+  "services": {
+    "devcontainer": {
+      "image": "755600509381.dkr.ecr.us-east-1.amazonaws.com/dx-devcontainer-java:1",
+      "volumes": [
+        "../..:/workspaces:cached",
+        "deploy-app:/workspaces/deploy"
+      ],
+      "command": "sleep infinity"
+    },
+    "appcontainer": {
+      "image": "755600509381.dkr.ecr.us-east-1.amazonaws.com/dx-javaapp21:21",
+      "ports": [
+        "8080:8080"
+      ],
+      "env_file": [
+        "dev.env",
+        "dev.secrets.env"
+      ],
+      "volumes": [
+        "deploy-app:/apps"
+      ]
+    }
+  },
+  "volumes": {
+    "deploy-app": {
+      "driver": "local"
+    }
+  },
+  "include": [
+    "docker-compose-extended.yml"
+  ]
+}

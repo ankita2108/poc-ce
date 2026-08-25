@@ -1,0 +1,22 @@
+---
+##
+# External configuration hosted in base app yml
+##
+
+# server:
+#   port: 8080
+# logging:
+#   level:
+#     root: DEBUG
+# management:
+#   endpoint:
+#     health:
+#       show-details: "always"
+# spring:
+#   profiles:
+#     active: default
+
+app:
+  base:
+    config: This is a property in my base config file
+...

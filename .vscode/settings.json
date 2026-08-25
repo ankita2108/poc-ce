@@ -1,0 +1,29 @@
+//****************************************************************************************************************
+// DO NOT MODIFY THIS FILE.  This file may be replaced at anytime without notice in your source code repository.
+// This file is part of the standard development framework at Alight. If you have suggested changes, please
+// see this page for how to contribute to the Alight Development "Paved Paths":
+// https://alightarchitecture.atlassian.net/wiki/x/AYC6GQ
+//****************************************************************************************************************
+{
+    "editor.tabSize": 4,
+    "files.eol": "\n",
+    "editor.formatOnSave": true,
+    "files.associations": {
+        "*.json": "jsonc"
+    },
+    "gradle.autoDetect": "on",
+    "java.autobuild.enabled": true,
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.import.exclusions": [
+        "**/build/**",
+        "**/.gradle/**",
+        "**/out/**",
+        "**/target/**"
+    ],
+    "java.jdt.ls.java.home": "/usr/local/sdkman/candidates/java/current",
+    "java.jdt.ls.vmargs": "-Xmx4G -XX:+UseParallelGC",
+    "files.watcherExclude": {
+        "**/build/**": true,
+        "**/.gradle/**": true
+    }
+}

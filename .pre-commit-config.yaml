@@ -1,0 +1,100 @@
+# ***************************************************************************************************************
+# DO NOT MODIFY THIS FILE.  This file may be replaced at anytime without notice in your source code repository.
+# This file is part of the standard development framework at Alight. If you have suggested changes, please
+# see this page for how to contribute to the Alight Development "Paved Paths":
+# https://alightarchitecture.atlassian.net/wiki/x/AYC6GQ
+#****************************************************************************************************************
+
+---
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+        name: Files should end with empty line
+        exclude: |
+          (?x)^(
+            .cz.json |
+            CHANGELOG.md |
+            .pr.txt
+          )$
+      - id: trailing-whitespace
+        name: Ensure that code don't have trailing whitespace
+      - id: check-case-conflict
+        name: Check for case conflicts
+      - id: check-shebang-scripts-are-executable
+        name: Check that scripts with shebangs are executable
+      - id: check-merge-conflict
+        name: Check for merge conflicts in code
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.13.9
+    hooks:
+      - id: commitizen
+        name: Commitizen
+  - repo: local
+    hooks:
+      - id: convert-to-lf
+        name: Convert Line Endings to LF
+        entry: bash -c 'find . -type f -exec dos2unix -n {} \;'
+        language: system
+        files: .*
+      - id: clean-up-temp-files
+        name: Cleanup Temporary Files
+        entry: bash -c 'rm -rf d2utmp*'
+        language: system
+        always_run: true
+      - id: check-json
+        name: Check JSON file format (with comments)
+        entry: |
+          bash -c 'for file in "$@"; do grep -Ev "^\s*//" "$file" | jq . > /dev/null 2>&1 || { echo "Invalid JSON format in file: $file"; exit 1; }; done' --
+        language: system
+        files: \.json$
+      - id: validate-cz-settings
+        name: Validate Commitizen Settings
+        entry: |
+          bash -c '
+          version=$(jq -r .commitizen.version .cz.json)
+          update_changelog=$(jq -r .commitizen.update_changelog_on_bump .cz.json)
+          major_version=$(echo $version | cut -d. -f1)
+
+          if [ "$major_version" -gt 0 ] && [ "$update_changelog" != "true" ]; then
+            echo "Error: When major version is greater than 0, update_changelog_on_bump must be true"
+            echo "Current version: $version"
+            echo "Current update_changelog_on_bump: $update_changelog"
+            exit 1
+          fi
+          exit 0'
+        language: system
+        files: \.cz\.json$
+      - id: validate-artifact-name-lowercase
+        name: Validate artifact name is lowercase
+        entry: |
+          bash -c '
+          if [ ! -f .alit.json ]; then
+            echo "Error: .alit.json file not found"
+            exit 1
+          fi
+
+          artifact_name=$(jq -r .build.artifact.name .alit.json)
+
+          if [ "$artifact_name" = "null" ]; then
+            echo "Error: build.artifact.name not found in .alit.json"
+            exit 1
+          fi
+
+          if [ "$artifact_name" != "${artifact_name,,}" ]; then
+            echo "Error: build.artifact.name equates to the ECR repo name which must be all lowercase. You will run into errors publishing with the current value of: $artifact_name"
+            exit 1
+          fi
+
+          exit 0'
+        language: system
+        files: \.alit\.json$
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+    - id: detect-secrets
+      args:
+      - "--exclude-lines"
+      - "^secrets\\:\\sinherit$|DX_CONFIG"

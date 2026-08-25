@@ -1,0 +1,23 @@
+#######################################################################################
+###                                                                                 ###
+###    DO NOT MODIFY THIS FILE  - Except for setting the 'publish' boolean to true  ###
+###                               if you want to test a feature or fix branch prior ###
+###                               merging into the 'main' branch.                   ###
+###                                                                                 ###
+#######################################################################################
+
+name: Java App Push
+
+on:
+  push:
+    branches-ignore:
+      - 'main'
+      - 'hotfix/*'
+
+jobs:
+  run-ci-push:
+    uses: AlightEngineering/dx-automation/.github/workflows/java-paved-path-push.yml@main
+    with:
+      # Set to true if you want your branch to be published for futher testing (e.g. a feature branch)
+      publish: false
+    secrets: inherit  # pragma: allowlist secret

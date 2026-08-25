@@ -1,0 +1,39 @@
+# services:
+#   localstack:
+#     image: 755600509381.dkr.ecr.us-east-1.amazonaws.com/localstack/localstack:4
+#     environment:
+#       - SERVICES=s3
+#     healthcheck:
+#       test: [ "CMD-SHELL", "curl -f http://localhost:4566/_localstack/health || exit 1" ]
+#       interval: 10s
+#       timeout: 10s
+#       retries: 5
+#   pgadmin:
+#     environment:
+#       PGADMIN_DEFAULT_EMAIL: me@alight.com
+#       PGADMIN_DEFAULT_PASSWORD: alight # pragma: allowlist secret
+#     image: dpage/pgadmin4
+#     ports:
+#     - 8090:80
+#   postgres:
+#     container_name: dev_postgres
+#     environment:
+#       POSTGRES_DB: myappdatabase
+#       POSTGRES_PASSWORD: postgres # pragma: allowlist secret
+#       POSTGRES_USER: postgres
+#     healthcheck:
+#       interval: 10s
+#       retries: 5
+#       test:
+#       - CMD-SHELL
+#       - pg_isready -U postgres
+#       timeout: 5s
+#     image: postgres:17.2
+#     ports:
+#     - 5432:5432
+#     restart: always
+#     volumes:
+#     - postgres_data:/var/lib/postgresql/data
+# volumes:
+#   postgres_data:
+#     driver: local

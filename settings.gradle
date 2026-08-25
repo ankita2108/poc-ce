@@ -1,0 +1,17 @@
+pluginManagement {
+    repositories {
+        maven { url "${artifactory_contextUrl}/dx-plugins-release" }
+    }
+}
+
+include ':boot-app'
+
+// Name of the spring boot application.
+project(':boot-app').name = 'app'
+
+// Include custom libraries (if any) under boot-libs folder within build.
+new File(rootDir, "boot-libs").eachDir { dir ->
+    if (file("${dir}/build.gradle").exists()) {
+        include ":boot-libs:${dir.name}"
+    }
+}

@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Local Boot",
+            "request": "launch",
+            "projectName": "boot-app",
+            "mainClass": "com.alight.TemplateApplication",
+            "args": [
+                "--spring.config.additional-location=optional:file:./config/app/"
+            ],
+            "envFile": [
+                "${workspaceFolder}/.devcontainer/dev.env",
+                "${workspaceFolder}/.devcontainer/dev.secrets.env"
+            ]
+        },
+        {
+            "type": "java",
+            "name": "Attach to Remote Boot",
+            "request": "attach",
+            "hostName": "appcontainer",
+            "port": 8000
+        }
+    ]
+}

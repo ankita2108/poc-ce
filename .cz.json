@@ -1,0 +1,95 @@
+{
+  "instructions": [
+    "DO NOT MODIFY THIS FILE.  This file may be replaced at anytime without notice in your source code repository.",
+    "This file is part of the standard development framework at Alight. If you have suggested changes, please",
+    "see this page for how to contribute to the Alight Development Paved Paths: https://alightarchitecture.atlassian.net/wiki/x/AYC6GQ"
+  ],
+  "commitizen": {
+    "name": "cz_customize",
+    "tag_format": "$version",
+    "version_scheme": "semver2",
+    "version": "0.0.0",
+    "update_changelog_on_bump": false,
+    "major_version_zero": true,
+    "customize": {
+      "message_template": "{{change_type}}{% if scope %}({{scope}}){% endif %}{% if is_breaking_change %}!{% endif %}: {{message}}{% if add_info %}\n\n{{add_info}}{% endif %}{% if is_breaking_change %}\n\nBREAKING CHANGE: {{footer}}{% elif footer %}\n\n{{footer}}{% endif %}\n\njira_ids: {{jira_ids}}",
+      "commit_parser": "^(?P<change_type>\\w+)(?:\\((?P<scope>[^)]+)\\))?(?P<breaking>!)?: (?P<message>.+)(?:\n\n.+)?(?:\n\n(?P<footer>.+))?",
+      "questions": [
+        {
+          "type": "list",
+          "name": "change_type",
+          "choices": [
+            {
+              "value": "feat",
+              "name": "feat:      Bump MINOR in SemVer. A new feature."
+            },
+            {
+              "value": "fix",
+              "name": "fix:       Bump PATCH in SemVer. A bug fix."
+            },
+            {
+              "value": "perf",
+              "name": "perf:      Bump PATCH in SemVer. A code change that improves performance."
+            },
+            {
+              "value": "refactor",
+              "name": "refactor:  Bump PATCH in SemVer. A code change that neither fixes a bug nor adds a feature."
+            },
+            {
+              "value": "build",
+              "name": "build:     No effect on SemVer. Changes to build system or dependencies (eg: docker, pip, npm)."
+            },
+            {
+              "value": "test",
+              "name": "test:      No effect on SemVer. Adding or changing tests."
+            },
+            {
+              "value": "ci",
+              "name": "ci:        No effect on SemVer. Changes to CI files and scripts (eg: GitHub Workflows)."
+            },
+            {
+              "value": "style",
+              "name": "style:     No effect on SemVer. Changes that do not affect code execution (eg: white-space, formatting, semi-colons, etc)."
+            },
+            {
+              "value": "docs",
+              "name": "docs:      No effect on SemVer. Documentation only changes."
+            }
+          ],
+          "message": "Select the type of change you are committing"
+        },
+        {
+          "type": "input",
+          "name": "scope",
+          "message": "What is the scope of this change? (class or file name): (press [enter] to skip)\n"
+        },
+        {
+          "type": "input",
+          "name": "message",
+          "message": "Write a short and imperative summary of the code changes: (lower case and no period)\n"
+        },
+        {
+          "type": "input",
+          "name": "add_info",
+          "message": "Provide additional contextual information about the code changes: (press [enter] to skip)\n"
+        },
+        {
+          "type": "confirm",
+          "name": "is_breaking_change",
+          "message": "Is this a BREAKING CHANGE? Correlates with MAJOR in SemVer\n",
+          "default": false
+        },
+        {
+          "type": "input",
+          "name": "footer",
+          "message": "Provide additional detail on the BREAKING CHANGE: (press [enter] to skip if this is not a BREAKING CHANGE)\n"
+        },
+        {
+          "type": "input",
+          "name": "jira_ids",
+          "message": "Provide a comma delimited list of JIRA IDs (ex. DX-382,DX-475) that are addressed with this change\n"
+        }
+      ]
+    }
+  }
+}

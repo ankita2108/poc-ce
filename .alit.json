@@ -1,0 +1,9 @@
+{
+    "build": {
+        "artifact": {
+            "name": "!change this to be the name of the image you want to publish to ecr!",
+            "BusinessServiceName": "CHANGE THIS to be your Business Service Name"
+        },
+        "paved_path": "SpringbootAPI"
+    }
+}

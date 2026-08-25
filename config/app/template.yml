@@ -1,0 +1,10 @@
+---
+##
+# External configuration hosted in service-specific app yml
+##
+app:
+  base:
+    config: This is an overwritten base property in my service config file
+  service:
+    config: This is a property in my service config file
+...
