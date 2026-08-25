@@ -8,6 +8,6 @@ public class SmokeTest {
 
     @Test
     public void startFromMain() throws Exception {
-        TemplateApplication.main(new String[] {});
+        TemplateApplication.main(new String[] { "--server.port=0" });
     }
 }
